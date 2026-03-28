@@ -13,7 +13,7 @@ from export.master_packager import MasterPackager
 
 # --- App Configuration ---
 st.set_page_config(page_title="Stratova Data Factory", layout="wide", page_icon="🏭")
-st.title("🏭 AI Training Data Generation Factory")
+st.title("AI Training Data Generation Factory")
 st.markdown("Enterprise pipeline to automatically ingest, process, generate, evaluate, and package training datasets for LLMs.")
 
 # Setup Session State
@@ -142,7 +142,7 @@ with tab3:
                 # Flash: ~$0.075 / 1M input tokens, ~$0.30 / 1M output tokens (approx estimates)
                 cost = (total_prompt / 1_000_000 * 0.075) + (total_completion / 1_000_000 * 0.3)
                 
-                st.markdown("### 📊 Live Token & Cost Monitor")
+                st.markdown(" Live Token & Cost Monitor")
                 m1, m2, m3 = st.columns(3)
                 m1.metric("Input Tokens", f"{total_prompt:,}")
                 m2.metric("Output Tokens", f"{total_completion:,}")
