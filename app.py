@@ -113,7 +113,7 @@ with tab3:
     with col1:
         task_types = st.multiselect("Select Task Templates (Multiple Allowed):", ["qa", "summary", "classification"], default=["qa"], format_func=lambda x: {"qa": "Q&A Generation", "summary": "Summarization", "classification": "Data Classification"}[x])
     with col2:
-        provider = st.selectbox("Select AI Provider:", ["openai", "anthropic", "gemini"], format_func=lambda x: x.capitalize())
+        provider = st.selectbox("Select AI Provider:", ["gemini", "anthropic", "openai"], format_func=lambda x: x.capitalize())
     
     if st.button("Start Massive Generation"):
         if not task_types:
