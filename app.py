@@ -173,17 +173,32 @@ with tab5:
     export_format = st.radio("Export Format:", ["CSV", "JSONL"])
     file_name = st.text_input("Output File Name:", "final_dataset." + export_format.lower())
 
-    if st.button("Package & Export"):
-        if st.session_state.approved_dataset:
-            packager = MasterPackager()
-            filepath = os.path.join(os.getcwd(), file_name)
-            try:
-                if export_format == "CSV":
-                    packager.export_to_csv(st.session_state.approved_dataset, filepath)
-                else:
-                    packager.export_to_jsonl(st.session_state.approved_dataset, filepath)
-                st.success(f"Successfully exported to **{filepath}**!")
-            except Exception as e:
-                st.error(f"Export failed: {e}")
-        else:
-            st.warning("No approved dataset to export. Verify through the evaluator station.")
+    if st.session_state.approved_dataset:
+        packager = MasterPackager()
+        filepath = os.path.join(os.getcwd(), file_name)
+        
+        try:
+            # Package it so the download button has fresh data
+            if export_format == "CSV":
+                packager.export_to_csv(st.session_state.approved_dataset, filepath)
+                mime_type = "text/csv"
+            else:
+                packager.export_to_jsonl(st.session_state.approved_dataset, filepath)
+                mime_type = "application/jsonlines"
+                
+            with open(filepath, "rb") as f:
+                file_data = f.read()
+                
+            st.success(f"Dataset securely packaged as {file_name}.")
+            st.download_button(
+                label=f"⬇️ Download {file_name}",
+                data=file_data,
+                file_name=file_name,
+                mime=mime_type,
+                use_container_width=True
+            )
+            
+        except Exception as e:
+            st.error(f"Export failed: {e}")
+    else:
+        st.warning("No approved dataset to export. Verify through the evaluator station.")
