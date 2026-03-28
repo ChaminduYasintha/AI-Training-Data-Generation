@@ -1,0 +1,26 @@
+# Python Environments
+venv/
+env/
+.env
+
+# Python generated files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Streamlit
+.streamlit/
+
+# Uploaded/Generated Data
+temp_uploads/
+*.csv
+*.jsonl
+dataset.csv
+final_dataset.csv
+final_dataset.jsonl
+
+# OS generated files
+.DS_Store
+Thumbs.db
